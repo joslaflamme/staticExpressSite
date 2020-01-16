@@ -22,5 +22,34 @@
         </form>
         
     </div>
+    <script>
+        fetch("/about").then(function(games){
+            games.json().then(function(thegames){
+                console.log(thegames);
+                for(let game of thegames.game){
+                    console.log(game);
+                    let gameElement = document.createElement("p");
+                    gameElement.innerText = game.game;
+                    document.body.appendChild(gameElement);
+
+                    //delete btn
+                    let deleteBtn = document.createElement("button");
+                    deleteBtn.innerText = "Delete";
+                    deleteBtn.addEventListener("click", function(){
+                        alert(game._id);
+                        location.reload();
+                        fetch("/deleteGame", {
+                            method:"POST",
+                            headers:{"Content-Type":"application/json"},
+                            body:JSON.stringify({
+                                _id:game._id
+                            })
+                        });
+                    });
+                    gameElement.appendChild(deleteBtn);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

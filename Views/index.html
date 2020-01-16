@@ -33,6 +33,24 @@
             I chose video game characters because I am currently playing <br>
             the witcher and wanted an excuse to use Geralt as part of the list.
         </p>
+        <form action="/gamePost" method="POST" onsubmit="return checkForm()">
+            <span id="err" style="color:red"></span>
+            <br>
+            <label for="game" >Enter Game Title</label>
+            <br>
+            <input type="text" name="game" id="GameTitle">
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+            function checkForm(){
+                if(document.getElementById("GameTitle").value == ""){
+                   event.preventDefault();
+                   document.getElementById('err').innerText = "Big Bad Error Man"; 
+                }
+                
+            }
+        </script>
     </div>
 </body>
 </html>
